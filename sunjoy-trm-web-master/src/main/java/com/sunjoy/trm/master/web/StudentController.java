@@ -1,5 +1,7 @@
 package com.sunjoy.trm.master.web;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,14 +59,21 @@ public class StudentController extends WebController {
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Response listStudent(@RequestParam(name = "params") String params) {
-
-		return null;
+		Response response = new Response();
+		StudentCriteria criteria = JSONObject.parseObject(params, StudentCriteria.class);
+		List<Student> students = studentService.query(criteria);
+		response.setData(students);
+		return response;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Response getStudent(@RequestParam(name = "params") String params) {
-
-		return null;
+		Response response = new Response();
+		StudentCriteria criteria = JSONObject.parseObject(params, StudentCriteria.class);
+		BeanUtils.checkEmptyFields(criteria, "id");
+		Student student = studentService.get(criteria.getId());
+		response.setData(student);
+		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -77,8 +86,12 @@ public class StudentController extends WebController {
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateStudent(@RequestBody StudentVo student) {
+	public Response updateStudent(@RequestBody StudentVo studentVo) {
 
-		return null;
+		Response response = new Response();
+		Student student=new Student();
+		BeanUtils.copyProperties(studentVo,student);
+		studentService.update(student);
+		return response;
 	}
 }

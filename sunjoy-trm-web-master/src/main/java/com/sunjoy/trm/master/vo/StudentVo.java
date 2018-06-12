@@ -8,7 +8,7 @@ public class StudentVo implements Serializable{
 	 * @serialField  serialVersionUID
 	 */
 	private static final long serialVersionUID = 4473406562920037358L;
-	
+	private String id;
 	private String code;
 	private String name;
 	private Date birthDate;
@@ -24,6 +24,14 @@ public class StudentVo implements Serializable{
 	private String parentPhone;
 	private String parentWx;
 	private String status;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

@@ -5,17 +5,19 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
+import com.sunjoy.common.utils.RandomUtils;
 import com.sunjoy.trm.master.config.AbstractUnitTestSupport;
 import com.sunjoy.trm.master.dao.criteria.StudentCriteria;
-import com.sunjoy.trm.master.dao.entity.Student;
 import com.sunjoy.trm.master.vo.StudentVo;
 
 public class StudentControllerTest extends AbstractUnitTestSupport {
@@ -59,6 +61,8 @@ public class StudentControllerTest extends AbstractUnitTestSupport {
 	}
 
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testAddStudent() {
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -73,8 +77,39 @@ public class StudentControllerTest extends AbstractUnitTestSupport {
 	}
 
 	@Test
+	@Transactional
+	@Rollback(true)
 	public void testUpdateStudent() {
-		fail("Not yet implemented");
+		try {
+			//step1, add new record
+			ObjectMapper objectMapper = new ObjectMapper();
+			StudentVo student = JMockData.mock(StudentVo.class, mockConfig);
+			student.setId( RandomUtils.createUUID());
+			mockMvc
+					.perform(MockMvcRequestBuilders.post("/Student/add").contentType(MediaType.APPLICATION_JSON)
+							.content(objectMapper.writeValueAsString(student)))
+					.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+			//step2, update the record
+			student.setName("Rober");
+			mockMvc
+			.perform(MockMvcRequestBuilders.post("/Student/update").contentType(MediaType.APPLICATION_JSON)
+					.content(objectMapper.writeValueAsString(student)))
+			.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+			
+			//step3,prove the change effive
+			
+			StudentCriteria criteria = new StudentCriteria();
+			criteria.setId(student.getId());
+			MvcResult result = mockMvc
+					.perform(MockMvcRequestBuilders.get("/Student/get").contentType(MediaType.APPLICATION_JSON)
+							.param("params", objectMapper.writeValueAsString(criteria)))
+					.andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print()).andReturn();
+			String resultString=result.getResponse().getContentAsString();
+			assertTrue(resultString.indexOf("Rober")>0);
+			logger.debug("testUpdateStudent result:\n{}", resultString.toString());
+		} catch (Exception e) {
+			this.handleException(e);
+		}
 	}
 
 }
