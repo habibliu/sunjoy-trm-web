@@ -16,22 +16,22 @@ import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
 import com.sunjoy.framework.service.controller.WebController;
-import com.sunjoy.trm.master.dao.criteria.CoachCriteria;
-import com.sunjoy.trm.master.dao.entity.Coach;
-import com.sunjoy.trm.master.service.ICoachService;
-import com.sunjoy.trm.master.vo.CoachVo;
+import com.sunjoy.trm.master.dao.criteria.CourseCriteria;
+import com.sunjoy.trm.master.dao.entity.Course;
+import com.sunjoy.trm.master.service.ICourseService;
+import com.sunjoy.trm.master.vo.CourseVo;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/Coach")
-public class CoachController  extends WebController{
+@RequestMapping(value = "/Course")
+public class CourseController  extends WebController{
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ICoachService coachService;
+	private ICourseService courseService;
 
 	/**
 	 * 分页查询
@@ -41,12 +41,12 @@ public class CoachController  extends WebController{
 	 */
 	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "CoachCriteria类型的json字符串", required = true, dataType = "String") })
+			@ApiImplicitParam(name = "params", value = "CourseCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listCoachByPage(@RequestParam(name = "params") String params) {
+	public Response listCourseByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
-		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
-		Page<Coach> page = coachService.queryByPage(criteria);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		Page<Course> page = courseService.queryByPage(criteria);
 		response.setData(page);
 		return response;
 	}
@@ -58,42 +58,42 @@ public class CoachController  extends WebController{
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Response listCoach(@RequestParam(name = "params") String params) {
+	public Response listCourse(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
-		List<Coach> coachs = coachService.query(criteria);
-		response.setData(coachs);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		List<Course> courses = courseService.query(criteria);
+		response.setData(courses);
 		return response;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Response getCoach(@RequestParam(name = "params") String params) {
+	public Response getCourse(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		Coach coach = coachService.get(criteria.getId());
-		response.setData(coach);
+		Course course = courseService.get(criteria.getId());
+		response.setData(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addCoach(@RequestBody CoachVo coachVo) {
+	public Response addCourse(@RequestBody CourseVo courseVo) {
 		Response response = new Response();
-		Coach coach=new Coach();
-		BeanUtils.copyProperties(coachVo,coach);
-		coachService.add(coach);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.add(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateCoach(@RequestBody CoachVo coachVo) {
+	public Response updateCourse(@RequestBody CourseVo courseVo) {
 
 		Response response = new Response();
-		Coach coach=new Coach();
-		BeanUtils.copyProperties(coachVo,coach);
-		coachService.update(coach);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.update(course);
 		return response;
 	}
 }

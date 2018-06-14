@@ -39,7 +39,7 @@ public class StudentController extends WebController {
 	 * @param params
 	 * @return
 	 */
-	@ApiOperation(value = "二维码分页查询")
+	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "params", value = "StudentCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)

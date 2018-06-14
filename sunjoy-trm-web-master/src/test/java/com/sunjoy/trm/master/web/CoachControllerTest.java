@@ -20,7 +20,6 @@ import com.sunjoy.trm.master.dao.criteria.CoachCriteria;
 import com.sunjoy.trm.master.vo.CoachVo;
 
 public class CoachControllerTest extends AbstractUnitTestSupport{
-
 	private MockConfig mockConfig;
 
 	@Before
@@ -79,6 +78,9 @@ public class CoachControllerTest extends AbstractUnitTestSupport{
 	@Transactional
 	@Rollback(true)
 	public void testUpdateCoach() {
+		
 		fail("Not yet implemented");
 	}
+
+	
 }
