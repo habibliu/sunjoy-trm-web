@@ -94,4 +94,14 @@ public class StudentController extends WebController {
 		studentService.update(student);
 		return response;
 	}
+	
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public Response removeStudent(@RequestBody StudentVo studentVo) {
+
+		Response response = new Response();
+		Student student=new Student();
+		BeanUtils.copyProperties(studentVo,student);
+		studentService.update(student);
+		return response;
+	}
 }
