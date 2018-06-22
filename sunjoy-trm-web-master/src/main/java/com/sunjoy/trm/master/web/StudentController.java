@@ -95,13 +95,13 @@ public class StudentController extends WebController {
 		return response;
 	}
 	
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public Response removeStudent(@RequestBody StudentVo studentVo) {
+	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
+	public Response removeStudent(@RequestParam(value = "id") String id) {
 
 		Response response = new Response();
 		Student student=new Student();
-		BeanUtils.copyProperties(studentVo,student);
-		studentService.update(student);
+		//BeanUtils.copyProperties(studentVo,student);
+		studentService.remove(id);
 		return response;
 	}
 }
