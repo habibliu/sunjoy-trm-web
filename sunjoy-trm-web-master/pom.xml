@@ -40,6 +40,11 @@
 			<artifactId>sunjoy-trm-component-master-service</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sunjoy.trm</groupId>
+			<artifactId>sunjoy-trm-component-bizcore-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- spring framework dependencies -->
 		<dependency>
