@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.web;
+package com.sunjoy.trm.master.web.master;
 
 import java.util.List;
 
@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
+import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.master.dao.criteria.StudentCriteria;
 import com.sunjoy.trm.master.dao.entity.Student;
@@ -46,7 +47,7 @@ public class StudentController extends WebController {
 	public Response listStudentByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
 		StudentCriteria criteria = JSONObject.parseObject(params, StudentCriteria.class);
-		Page<Student> page = studentService.queryByPage(criteria);
+		Page<Student> page = studentService.queryByPage(criteria,new PageInfo());
 		response.setData(page);
 		return response;
 	}
