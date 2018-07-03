@@ -33,3 +33,5 @@ COMMENT ON COLUMN "biz"."registion"."payment_date" IS '支付日期';
 COMMENT ON COLUMN "biz"."registion"."memo" IS '备注';
 
 CREATE UNIQUE INDEX "IDX_PK_REGISTION" ON "biz"."registion" USING btree ("id");
+
+ALTER TABLE "biz"."registion" ADD PRIMARY KEY ("id");
