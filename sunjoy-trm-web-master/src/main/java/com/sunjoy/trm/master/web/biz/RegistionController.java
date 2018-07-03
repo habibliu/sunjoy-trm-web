@@ -79,9 +79,7 @@ public class RegistionController extends WebController{
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Response addRegistion(@RequestBody RegistionDto registionVo) {
 		Response response = new Response();
-		Registion registion=new Registion();
-		BeanUtils.copyProperties(registionVo,registion);
-		registionService.add(registion);
+		registionService.add(registionVo);
 		return response;
 	}
 
@@ -89,9 +87,7 @@ public class RegistionController extends WebController{
 	public Response updateRegistion(@RequestBody RegistionDto registionVo) {
 
 		Response response = new Response();
-		Registion registion=new Registion();
-		BeanUtils.copyProperties(registionVo,registion);
-		registionService.update(registion);
+		registionService.update(registionVo);
 		return response;
 	}
 	

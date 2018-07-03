@@ -1,6 +1,6 @@
 CREATE TABLE "biz"."registion" (
 "id" varchar(32) NOT NULL,
-"regist_date" date NOT NULL,
+"register_date" date NOT NULL,
 "course_id" varchar(32) NOT NULL,
 "student_id" varchar(32) NOT NULL,
 "periods" int4,
@@ -20,7 +20,7 @@ CREATE TABLE "biz"."registion" (
 WITH (OIDS=FALSE)
 
 ;
-COMMENT ON COLUMN "biz"."registion"."regist_date" IS '登记日期';
+COMMENT ON COLUMN "biz"."registion"."register_date" IS '登记日期';
 COMMENT ON COLUMN "biz"."registion"."course_id" IS '课程ID';
 COMMENT ON COLUMN "biz"."registion"."student_id" IS '学员ID';
 COMMENT ON COLUMN "biz"."registion"."periods" IS '报读期数';

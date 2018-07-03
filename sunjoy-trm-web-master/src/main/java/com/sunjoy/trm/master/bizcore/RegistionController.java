@@ -24,7 +24,6 @@ import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
 import com.sunjoy.trm.bizcore.dao.entity.Registion;
 import com.sunjoy.trm.bizcore.service.IRegistionService;
-import com.sunjoy.trm.master.vo.RegistionVo;
 
 /**
  * 课程注册服务类
@@ -37,7 +36,7 @@ public class RegistionController extends WebController {
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private IRegistionService studentService;
+	private IRegistionService registionService;
 
 	/**
 	 * 分页查询
@@ -52,7 +51,7 @@ public class RegistionController extends WebController {
 	public Response listRegistionByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
-		Page<RegistionDto> page = studentService.query(criteria,null);
+		Page<RegistionDto> page = registionService.query(criteria,null);
 		response.setData(page);
 		return response;
 	}
@@ -64,27 +63,23 @@ public class RegistionController extends WebController {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		Registion student = studentService.get(criteria.getId());
-		response.setData(student);
+		Registion registion = registionService.get(criteria.getId());
+		response.setData(registion);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addRegistion(@RequestBody RegistionVo studentVo) {
+	public Response addRegistion(@RequestBody RegistionDto registionVo) {
 		Response response = new Response();
-		Registion student=new Registion();
-		BeanUtils.copyProperties(studentVo,student);
-		studentService.add(student);
+		registionService.add(registionVo);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateRegistion(@RequestBody RegistionVo studentVo) {
+	public Response updateRegistion(@RequestBody RegistionDto registionVo) {
 
 		Response response = new Response();
-		Registion student=new Registion();
-		BeanUtils.copyProperties(studentVo,student);
-		studentService.update(student);
+		registionService.update(registionVo);
 		return response;
 	}
 	
@@ -92,9 +87,9 @@ public class RegistionController extends WebController {
 	public Response removeRegistion(@RequestParam(value = "id") String id) {
 
 		Response response = new Response();
-		Registion student=new Registion();
-		//BeanUtils.copyProperties(studentVo,student);
-		studentService.remove(id);
+		Registion registion=new Registion();
+		//BeanUtils.copyProperties(registionVo,registion);
+		registionService.remove(id);
 		return response;
 	}
 }
