@@ -17,7 +17,7 @@ import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
 import com.sunjoy.trm.master.config.AbstractUnitTestSupport;
 import com.sunjoy.trm.master.dao.criteria.CoachCriteria;
-import com.sunjoy.trm.master.vo.CoachVo;
+import com.sunjoy.trm.web.master.vo.CoachVo;
 
 public class CoachControllerTest extends AbstractUnitTestSupport{
 	private MockConfig mockConfig;

@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.web.master;
+package com.sunjoy.trm.web.master;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.master.dao.criteria.StudentCriteria;
 import com.sunjoy.trm.master.dao.entity.Student;
 import com.sunjoy.trm.master.service.IStudentService;
-import com.sunjoy.trm.master.vo.StudentVo;
+import com.sunjoy.trm.web.master.vo.StudentVo;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

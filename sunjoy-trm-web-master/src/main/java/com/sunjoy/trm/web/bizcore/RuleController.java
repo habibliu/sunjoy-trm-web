@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.bizcore;
+package com.sunjoy.trm.web.bizcore;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -22,7 +22,7 @@ import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.bizcore.dao.criteria.RuleCriteria;
 import com.sunjoy.trm.bizcore.dao.entity.Rule;
 import com.sunjoy.trm.bizcore.service.IRuleSettingService;
-import com.sunjoy.trm.master.vo.RuleVo;
+import com.sunjoy.trm.web.master.vo.RuleVo;
 
 /**
  *

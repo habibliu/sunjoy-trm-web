@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.bizcore;
+package com.sunjoy.trm.web.bizcore;
 /**
  *
  * @author liuganchao<740033486@qq.com>

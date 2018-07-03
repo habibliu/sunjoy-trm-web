@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master;
+package com.sunjoy.trm.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,14 +10,14 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan(basePackages = { "com.sunjoy" })
-public class MasterWebApplication extends SpringBootServletInitializer {
+public class TRMWebApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MasterWebApplication.class, args);
+		SpringApplication.run(TRMWebApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(MasterWebApplication.class);
+		return builder.sources(TRMWebApplication.class);
 	}
 }

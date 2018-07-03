@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.bizcore;
+package com.sunjoy.trm.web.bizcore;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
+import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
@@ -48,11 +49,11 @@ public class RegistionController extends WebController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "params", value = "RegistionCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listRegistionByPage(@RequestParam(name = "params") String params) {
+	public Response listRegistionByPage(@RequestParam(name = "params") String params ,@RequestParam(name = "page") PageInfo page) {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
-		Page<RegistionDto> page = registionService.query(criteria,null);
-		response.setData(page);
+		Page<RegistionDto> returnPage = registionService.query(criteria,page);
+		response.setData(returnPage);
 		return response;
 	}
 

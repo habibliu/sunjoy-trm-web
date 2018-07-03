@@ -18,7 +18,7 @@ import com.github.jsonzou.jmockdata.MockConfig;
 import com.sunjoy.common.utils.RandomUtils;
 import com.sunjoy.trm.master.config.AbstractUnitTestSupport;
 import com.sunjoy.trm.master.dao.criteria.CourseCriteria;
-import com.sunjoy.trm.master.vo.CourseVo;
+import com.sunjoy.trm.web.master.vo.CourseVo;
 
 public class CourseControllerTest extends AbstractUnitTestSupport{
 

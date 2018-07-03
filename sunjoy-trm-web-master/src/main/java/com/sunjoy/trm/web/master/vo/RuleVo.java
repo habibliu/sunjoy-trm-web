@@ -1,9 +1,9 @@
-package com.sunjoy.trm.master.bizcore;
+package com.sunjoy.trm.web.master.vo;
 /**
  *
  * @author liuganchao<740033486@qq.com>
  * @date 2018年6月27日
  */
-public class ShiftController {
+public class RuleVo {
 
 }

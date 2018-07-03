@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.web.master;
+package com.sunjoy.trm.web.master;
 
 import java.util.List;
 
@@ -17,22 +17,22 @@ import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
 import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
-import com.sunjoy.trm.master.dao.criteria.VenueCriteria;
-import com.sunjoy.trm.master.dao.entity.Venue;
-import com.sunjoy.trm.master.service.IVenueService;
-import com.sunjoy.trm.master.vo.VenueVo;
+import com.sunjoy.trm.master.dao.criteria.CoachCriteria;
+import com.sunjoy.trm.master.dao.entity.Coach;
+import com.sunjoy.trm.master.service.ICoachService;
+import com.sunjoy.trm.web.master.vo.CoachVo;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/Venue")
-public class VenueController  extends WebController{
+@RequestMapping(value = "/Coach")
+public class CoachController  extends WebController{
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private IVenueService venueService;
+	private ICoachService coachService;
 
 	/**
 	 * 分页查询
@@ -42,12 +42,12 @@ public class VenueController  extends WebController{
 	 */
 	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "VenueCriteria类型的json字符串", required = true, dataType = "String") })
+			@ApiImplicitParam(name = "params", value = "CoachCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listVenueByPage(@RequestParam(name = "params") String params) {
+	public Response listCoachByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
-		Page<Venue> page = venueService.queryByPage(criteria,new PageInfo());
+		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
+		Page<Coach> page = coachService.queryByPage(criteria,new PageInfo());
 		response.setData(page);
 		return response;
 	}
@@ -59,42 +59,42 @@ public class VenueController  extends WebController{
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Response listVenue(@RequestParam(name = "params") String params) {
+	public Response listCoach(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
-		List<Venue> venues = venueService.query(criteria);
-		response.setData(venues);
+		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
+		List<Coach> coachs = coachService.query(criteria);
+		response.setData(coachs);
 		return response;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Response getVenue(@RequestParam(name = "params") String params) {
+	public Response getCoach(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
+		CoachCriteria criteria = JSONObject.parseObject(params, CoachCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		Venue venue = venueService.get(criteria.getId());
-		response.setData(venue);
+		Coach coach = coachService.get(criteria.getId());
+		response.setData(coach);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addVenue(@RequestBody VenueVo venueVo) {
+	public Response addCoach(@RequestBody CoachVo coachVo) {
 		Response response = new Response();
-		Venue venue=new Venue();
-		BeanUtils.copyProperties(venueVo,venue);
-		venueService.add(venue);
+		Coach coach=new Coach();
+		BeanUtils.copyProperties(coachVo,coach);
+		coachService.add(coach);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateVenue(@RequestBody VenueVo venueVo) {
+	public Response updateCoach(@RequestBody CoachVo coachVo) {
 
 		Response response = new Response();
-		Venue venue=new Venue();
-		BeanUtils.copyProperties(venueVo,venue);
-		venueService.update(venue);
+		Coach coach=new Coach();
+		BeanUtils.copyProperties(coachVo,coach);
+		coachService.update(coach);
 		return response;
 	}
 }

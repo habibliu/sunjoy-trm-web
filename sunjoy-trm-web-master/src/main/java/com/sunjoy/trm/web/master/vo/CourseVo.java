@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.vo;
+package com.sunjoy.trm.web.master.vo;
 
 import java.io.Serializable;
 

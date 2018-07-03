@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.web.biz;
+package com.sunjoy.trm.web.master;
 
 import java.util.List;
 
@@ -17,22 +17,23 @@ import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
 import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
-import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
-import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
-import com.sunjoy.trm.bizcore.dao.entity.Registion;
-import com.sunjoy.trm.bizcore.service.IRegistionService;
+import com.sunjoy.trm.master.dao.criteria.CourseCriteria;
+import com.sunjoy.trm.master.dao.entity.Course;
+import com.sunjoy.trm.master.service.ICourseService;
+import com.sunjoy.trm.web.master.vo.CourseVo;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/Registion")
-public class RegistionController extends WebController{
+@RequestMapping(value = "/Course")
+public class CourseController  extends WebController{
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
-	private IRegistionService registionService;
-	
+	private ICourseService courseService;
+
 	/**
 	 * 分页查询
 	 * 
@@ -41,12 +42,12 @@ public class RegistionController extends WebController{
 	 */
 	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "RegistionCriteria类型的json字符串", required = true, dataType = "String") })
+			@ApiImplicitParam(name = "params", value = "CourseCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listRegistionByPage(@RequestParam(name = "params") String params) {
+	public Response listCourseByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
-		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
-		Page<RegistionDto> page = registionService.query(criteria,new PageInfo());
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		Page<Course> page = courseService.queryByPage(criteria,new PageInfo());
 		response.setData(page);
 		return response;
 	}
@@ -58,47 +59,42 @@ public class RegistionController extends WebController{
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Response listRegistion(@RequestParam(name = "params") String params) {
+	public Response listCourse(@RequestParam(name = "params") String params) {
+
 		Response response = new Response();
-		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
-		Page<RegistionDto> registions = registionService.query(criteria,null);
-		response.setData(registions);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		List<Course> courses = courseService.query(criteria);
+		response.setData(courses);
 		return response;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Response getRegistion(@RequestParam(name = "params") String params) {
+	public Response getCourse(@RequestParam(name = "params") String params) {
+
 		Response response = new Response();
-		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		RegistionDto registion = registionService.get(criteria.getId());
-		response.setData(registion);
+		Course course = courseService.get(criteria.getId());
+		response.setData(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addRegistion(@RequestBody RegistionDto registionVo) {
+	public Response addCourse(@RequestBody CourseVo courseVo) {
 		Response response = new Response();
-		registionService.add(registionVo);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.add(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateRegistion(@RequestBody RegistionDto registionVo) {
+	public Response updateCourse(@RequestBody CourseVo courseVo) {
 
 		Response response = new Response();
-		registionService.update(registionVo);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.update(course);
 		return response;
 	}
-	
-	@RequestMapping(value = "/remove", method = RequestMethod.DELETE)
-	public Response removeRegistion(@RequestParam(value = "id") String id) {
-
-		Response response = new Response();
-		Registion registion=new Registion();
-		//BeanUtils.copyProperties(registionVo,registion);
-		registionService.remove(id);
-		return response;
-	}
-
 }
