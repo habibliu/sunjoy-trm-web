@@ -1,4 +1,4 @@
-package com.sunjoy.trm.master.web;
+package com.sunjoy.trm.master.web.master;
 
 import java.util.List;
 
@@ -15,23 +15,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
+import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
-import com.sunjoy.trm.master.dao.criteria.VenueCriteria;
-import com.sunjoy.trm.master.dao.entity.Venue;
-import com.sunjoy.trm.master.service.IVenueService;
-import com.sunjoy.trm.master.vo.VenueVo;
+import com.sunjoy.trm.master.dao.criteria.CourseCriteria;
+import com.sunjoy.trm.master.dao.entity.Course;
+import com.sunjoy.trm.master.service.ICourseService;
+import com.sunjoy.trm.master.vo.CourseVo;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping(value = "/Venue")
-public class VenueController  extends WebController{
+@RequestMapping(value = "/Course")
+public class CourseController  extends WebController{
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private IVenueService venueService;
+	private ICourseService courseService;
 
 	/**
 	 * 分页查询
@@ -41,12 +42,12 @@ public class VenueController  extends WebController{
 	 */
 	@ApiOperation(value = "分页查询")
 	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "VenueCriteria类型的json字符串", required = true, dataType = "String") })
+			@ApiImplicitParam(name = "params", value = "CourseCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listVenueByPage(@RequestParam(name = "params") String params) {
+	public Response listCourseByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
-		Page<Venue> page = venueService.queryByPage(criteria);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		Page<Course> page = courseService.queryByPage(criteria,new PageInfo());
 		response.setData(page);
 		return response;
 	}
@@ -58,42 +59,42 @@ public class VenueController  extends WebController{
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public Response listVenue(@RequestParam(name = "params") String params) {
+	public Response listCourse(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
-		List<Venue> venues = venueService.query(criteria);
-		response.setData(venues);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
+		List<Course> courses = courseService.query(criteria);
+		response.setData(courses);
 		return response;
 	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
-	public Response getVenue(@RequestParam(name = "params") String params) {
+	public Response getCourse(@RequestParam(name = "params") String params) {
 
 		Response response = new Response();
-		VenueCriteria criteria = JSONObject.parseObject(params, VenueCriteria.class);
+		CourseCriteria criteria = JSONObject.parseObject(params, CourseCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		Venue venue = venueService.get(criteria.getId());
-		response.setData(venue);
+		Course course = courseService.get(criteria.getId());
+		response.setData(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addVenue(@RequestBody VenueVo venueVo) {
+	public Response addCourse(@RequestBody CourseVo courseVo) {
 		Response response = new Response();
-		Venue venue=new Venue();
-		BeanUtils.copyProperties(venueVo,venue);
-		venueService.add(venue);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.add(course);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateVenue(@RequestBody VenueVo venueVo) {
+	public Response updateCourse(@RequestBody CourseVo courseVo) {
 
 		Response response = new Response();
-		Venue venue=new Venue();
-		BeanUtils.copyProperties(venueVo,venue);
-		venueService.update(venue);
+		Course course=new Course();
+		BeanUtils.copyProperties(courseVo,course);
+		courseService.update(course);
 		return response;
 	}
 }

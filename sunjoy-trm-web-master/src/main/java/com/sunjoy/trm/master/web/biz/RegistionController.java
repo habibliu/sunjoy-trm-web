@@ -1,8 +1,4 @@
-package com.sunjoy.trm.master.bizcore;
-
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+package com.sunjoy.trm.master.web.biz;
 
 import java.util.List;
 
@@ -19,26 +15,24 @@ import com.alibaba.fastjson.JSONObject;
 import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
+import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
 import com.sunjoy.trm.bizcore.dao.entity.Registion;
 import com.sunjoy.trm.bizcore.service.IRegistionService;
-import com.sunjoy.trm.master.vo.RegistionVo;
 
-/**
- * 课程注册服务类
- * @author liuganchao<740033486@qq.com>
- * @date 2018年6月27日
- */
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping(value = "/Registion")
-public class RegistionController extends WebController {
+public class RegistionController extends WebController{
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
-	private IRegistionService studentService;
-
+	private IRegistionService registionService;
+	
 	/**
 	 * 分页查询
 	 * 
@@ -52,39 +46,52 @@ public class RegistionController extends WebController {
 	public Response listRegistionByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
-		Page<RegistionDto> page = studentService.query(criteria,null);
+		Page<RegistionDto> page = registionService.query(criteria,new PageInfo());
 		response.setData(page);
 		return response;
 	}
 
-	
+	/**
+	 * 不分页查询
+	 * 
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public Response listRegistion(@RequestParam(name = "params") String params) {
+		Response response = new Response();
+		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
+		Page<RegistionDto> registions = registionService.query(criteria,null);
+		response.setData(registions);
+		return response;
+	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public Response getRegistion(@RequestParam(name = "params") String params) {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
 		BeanUtils.checkEmptyFields(criteria, "id");
-		Registion student = studentService.get(criteria.getId());
-		response.setData(student);
+		RegistionDto registion = registionService.get(criteria.getId());
+		response.setData(registion);
 		return response;
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Response addRegistion(@RequestBody RegistionVo studentVo) {
+	public Response addRegistion(@RequestBody RegistionDto registionVo) {
 		Response response = new Response();
-		Registion student=new Registion();
-		BeanUtils.copyProperties(studentVo,student);
-		studentService.add(student);
+		Registion registion=new Registion();
+		BeanUtils.copyProperties(registionVo,registion);
+		registionService.add(registion);
 		return response;
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public Response updateRegistion(@RequestBody RegistionVo studentVo) {
+	public Response updateRegistion(@RequestBody RegistionDto registionVo) {
 
 		Response response = new Response();
-		Registion student=new Registion();
-		BeanUtils.copyProperties(studentVo,student);
-		studentService.update(student);
+		Registion registion=new Registion();
+		BeanUtils.copyProperties(registionVo,registion);
+		registionService.update(registion);
 		return response;
 	}
 	
@@ -92,10 +99,10 @@ public class RegistionController extends WebController {
 	public Response removeRegistion(@RequestParam(value = "id") String id) {
 
 		Response response = new Response();
-		Registion student=new Registion();
-		//BeanUtils.copyProperties(studentVo,student);
-		studentService.remove(id);
+		Registion registion=new Registion();
+		//BeanUtils.copyProperties(registionVo,registion);
+		registionService.remove(id);
 		return response;
 	}
-}
 
+}
