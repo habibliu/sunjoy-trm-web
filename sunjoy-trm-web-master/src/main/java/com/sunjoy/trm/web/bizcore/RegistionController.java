@@ -49,9 +49,10 @@ public class RegistionController extends WebController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "params", value = "RegistionCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public Response listRegistionByPage(@RequestParam(name = "params") String params ,@RequestParam(name = "page") PageInfo page) {
+	public Response listRegistionByPage(@RequestParam(name = "params") String params ,@RequestParam(name = "page") String pageInfo) {
 		Response response = new Response();
 		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
+		PageInfo page=JSONObject.parseObject(pageInfo, PageInfo.class);
 		Page<RegistionDto> returnPage = registionService.query(criteria,page);
 		response.setData(returnPage);
 		return response;
