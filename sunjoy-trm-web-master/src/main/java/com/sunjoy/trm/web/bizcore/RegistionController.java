@@ -23,8 +23,10 @@ import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
+import com.sunjoy.trm.bizcore.dao.dto.ScheduleStudentDto;
 import com.sunjoy.trm.bizcore.dao.entity.Registion;
 import com.sunjoy.trm.bizcore.service.IRegistionService;
+import com.sunjoy.trm.master.dao.entity.Student;
 
 /**
  * 课程注册服务类
@@ -92,6 +94,16 @@ public class RegistionController extends WebController {
 		Registion registion=new Registion();
 		//BeanUtils.copyProperties(registionVo,registion);
 		registionService.remove(id);
+		return response;
+	}
+	
+	@RequestMapping(value = "/getCourseStudents", method = RequestMethod.GET)
+	public Response getCourseStudents(@RequestParam(name = "params") String params) {
+		Response response = new Response();
+		RegistionCriteria criteria = JSONObject.parseObject(params, RegistionCriteria.class);
+		BeanUtils.checkEmptyFields(criteria, "courseId");
+		List<ScheduleStudentDto> students = registionService.getCourseStudents(criteria.getCourseId());
+		response.setData(students);
 		return response;
 	}
 }
