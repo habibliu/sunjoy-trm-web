@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.github.jsonzou.jmockdata.MockConfig;
-import com.sunjoy.common.utils.RandomUtils;
+import com.sunjoy.framework.utils.RandomUtils;
 import com.sunjoy.trm.master.config.AbstractUnitTestSupport;
 import com.sunjoy.trm.master.dao.criteria.VenueCriteria;
 import com.sunjoy.trm.web.master.vo.VenueVo;

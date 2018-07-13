@@ -40,26 +40,39 @@
 				<scope>test</scope>
 			</dependency>
 			<!-- sunjoy framework dependencies -->
-			<dependency>
-				<groupId>com.sunjoy.framework</groupId>
-				<artifactId>sunjoy-framework-client</artifactId>
-				<version>${sunjoy.framework.version}</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.sunjoy.framework</groupId>
 				<artifactId>sunjoy-framework-service</artifactId>
 				<version>${sunjoy.framework.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<!-- sunjoy common dependencies -->
 			<dependency>
 				<groupId>com.sunjoy.common</groupId>
 				<artifactId>sunjoy-common-base</artifactId>
 				<version>${sunjoy.common.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.sunjoy.common</groupId>
 				<artifactId>sunjoy-common-auth</artifactId>
 				<version>${sunjoy.common.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<!-- sunjoy component dependencies -->
+			<dependency>
+				<groupId>com.sunjoy.trm</groupId>
+				<artifactId>sunjoy-trm-component-master-service</artifactId>
+				<version>${project.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.sunjoy.trm</groupId>
+				<artifactId>sunjoy-trm-component-bizcore-service</artifactId>
+				<version>${project.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<!-- other dependencies -->
 			<dependency>
@@ -69,7 +82,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
 
 	<repositories>
 		<repository>
@@ -89,18 +101,15 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-<!-- 
 	<distributionManagement>
 		<repository>
-			<id>nexus-releases</id>
-			<url>http://192.168.0.237:8081/nexus/content/repositories/releases</url>
+			<id>Releases</id>
+			<url>http://localhost:8081/nexus/content/repositories/releases</url>
 		</repository>
 
 		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<url>http://192.168.0.237:8081/nexus/content/repositories/snapshots</url>
+			<id>Snapshots</id>
+			<url>http://localhost:8081/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
-	 -->
 </project>

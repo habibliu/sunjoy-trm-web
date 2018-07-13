@@ -1,9 +1,5 @@
 package com.sunjoy.trm.web.bizcore;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
 import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
+import com.sunjoy.framework.utils.BeanUtils;
 import com.sunjoy.trm.bizcore.dao.criteria.RegistionCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RegistionDto;
 import com.sunjoy.trm.bizcore.dao.dto.ScheduleStudentDto;
@@ -47,9 +43,6 @@ public class RegistionController extends WebController {
 	 * @param params
 	 * @return
 	 */
-	@ApiOperation(value = "分页查询")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "RegistionCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public Response listRegistionByPage(@RequestParam(name = "params") String params ,@RequestParam(name = "page") String pageInfo) {
 		Response response = new Response();

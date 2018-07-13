@@ -19,32 +19,22 @@
 		<!-- sunjoy framework dependencies -->
 		<dependency>
 			<groupId>com.sunjoy.framework</groupId>
-			<artifactId>sunjoy-framework-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sunjoy.framework</groupId>
 			<artifactId>sunjoy-framework-service</artifactId>
 		</dependency>
-		<!-- sunjoy common dependencies -->
+		
 		<dependency>
 			<groupId>com.sunjoy.common</groupId>
 			<artifactId>sunjoy-common-base</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sunjoy.common</groupId>
-			<artifactId>sunjoy-common-auth</artifactId>
 		</dependency>
 		<!-- sunjoy component dependencies -->
 		<dependency>
 			<groupId>com.sunjoy.trm</groupId>
 			<artifactId>sunjoy-trm-component-master-service</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		
 		<dependency>
 			<groupId>com.sunjoy.trm</groupId>
 			<artifactId>sunjoy-trm-component-bizcore-service</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 
 		<!-- spring framework dependencies -->
@@ -83,6 +73,9 @@
 				</executions>
 				<configuration>
 					<executable>true</executable>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -113,7 +106,13 @@
 			</properties>
 			
 		</profile>
-
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profiles.active>prod</profiles.active>
+			</properties>
+			
+		</profile>
 		<profile>
 			<id>notebook</id>
 			<properties>

@@ -12,8 +12,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.support.GenericWebApplicationContext;
 
-import com.sunjoy.common.exception.CommonException;
 import com.sunjoy.framework.client.core.ClientConfig;
+import com.sunjoy.framework.exception.CommonException;
 
 
 /**

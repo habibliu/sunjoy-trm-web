@@ -12,19 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sunjoy.common.utils.BeanUtils;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.dao.paging.Page;
 import com.sunjoy.framework.dao.paging.PageInfo;
 import com.sunjoy.framework.service.controller.WebController;
+import com.sunjoy.framework.utils.BeanUtils;
 import com.sunjoy.trm.master.dao.criteria.CourseCriteria;
 import com.sunjoy.trm.master.dao.entity.Course;
 import com.sunjoy.trm.master.service.ICourseService;
 import com.sunjoy.trm.web.master.vo.CourseVo;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/Course")
@@ -40,9 +37,6 @@ public class CourseController  extends WebController{
 	 * @param params
 	 * @return
 	 */
-	@ApiOperation(value = "分页查询")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "params", value = "CourseCriteria类型的json字符串", required = true, dataType = "String") })
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public Response listCourseByPage(@RequestParam(name = "params") String params) {
 		Response response = new Response();
