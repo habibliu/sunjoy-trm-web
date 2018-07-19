@@ -21,14 +21,6 @@
 			<groupId>com.sunjoy.framework</groupId>
 			<artifactId>sunjoy-framework-service</artifactId>
 		</dependency>
-<<<<<<< HEAD
-
-=======
-		<dependency>
-			<groupId>com.sunjoy.common</groupId>
-			<artifactId>sunjoy-common-auth</artifactId>
-		</dependency>
->>>>>>> 825bef7c715d8c78050bf8ae1941c8ddb6c13c13
 		<dependency>
 			<groupId>com.sunjoy.common</groupId>
 			<artifactId>sunjoy-common-base</artifactId>
@@ -115,13 +107,10 @@
 			<properties>
 				<profiles.active>dev</profiles.active>
 			</properties>
-<<<<<<< HEAD
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-=======
 
->>>>>>> 825bef7c715d8c78050bf8ae1941c8ddb6c13c13
 		</profile>
 		<profile>
 			<id>prod</id>
