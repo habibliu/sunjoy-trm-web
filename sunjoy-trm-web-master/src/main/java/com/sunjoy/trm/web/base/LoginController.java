@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sunjoy.common.auth.service.ISecurityService;
 import com.sunjoy.framework.client.dto.Response;
+import com.sunjoy.framework.service.controller.WebController;
 
 /**
  *
@@ -18,7 +19,7 @@ import com.sunjoy.framework.client.dto.Response;
  * @date 2018年7月18日
  */
 @RestController
-public class LoginController {
+public class LoginController extends WebController{
 	
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -33,7 +34,7 @@ public class LoginController {
 		if(user!=null){
 			response.setData(user);
 		}else{
-			response.setCode("000001");
+			response.setCode("error");
 		}
         return response;
     }

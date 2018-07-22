@@ -46,34 +46,31 @@
 				<groupId>com.sunjoy.framework</groupId>
 				<artifactId>sunjoy-framework-service</artifactId>
 				<version>${sunjoy.framework.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<!-- sunjoy common dependencies -->
 			<dependency>
 				<groupId>com.sunjoy.common</groupId>
 				<artifactId>sunjoy-common-base</artifactId>
 				<version>${sunjoy.common.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>com.sunjoy.common</groupId>
 				<artifactId>sunjoy-common-auth</artifactId>
 				<version>${sunjoy.common.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<!-- sunjoy component dependencies -->
-			<dependency>
-				<groupId>com.sunjoy.trm</groupId>
-				<artifactId>sunjoy-trm-component-bizcore-service</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
-				<scope>provided</scope>
-			</dependency>
+			
 
 			<dependency>
 				<groupId>com.sunjoy.trm</groupId>
 				<artifactId>sunjoy-trm-component-master-service</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
-				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+			  <groupId>com.sunjoy.trm</groupId>
+			  <artifactId>sunjoy-trm-component-bizcore-service</artifactId>
+			  <version>0.0.1-SNAPSHOT</version>
 			</dependency>
 			<!-- other dependencies -->
 			<dependency>
