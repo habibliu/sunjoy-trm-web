@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
+import com.sunjoy.common.auth.dao.entity.User;
 import com.sunjoy.common.auth.service.ISecurityService;
 import com.sunjoy.framework.client.dto.Response;
 import com.sunjoy.framework.service.controller.WebController;
@@ -27,10 +29,11 @@ public class LoginController extends WebController{
 	private ISecurityService securityService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-    public Response loginPage(@RequestParam(name = "username") String username) {
-		logger.info("{} is logining....",username);
+    public Response loginPage(@RequestParam(name = "params") String params) {
+		User userVo=JSONObject.parseObject(params,User.class);
+		logger.info("{} is logining....",userVo.getUsername());
 		Response response = new Response();
-		UserDetails user=securityService.loadUserByUsername(username);
+		UserDetails user=securityService.loadUserByUsername(userVo.getUsername());
 		if(user!=null){
 			response.setData(user);
 		}else{
