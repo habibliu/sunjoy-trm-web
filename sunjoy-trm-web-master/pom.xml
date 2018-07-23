@@ -51,6 +51,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
@@ -114,7 +118,9 @@
 			<properties>
 				<profiles.active>dev</profiles.active>
 			</properties>
-			
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 
 		</profile>
 		<profile>
@@ -129,9 +135,7 @@
 			<properties>
 				<profiles.active>notebook</profiles.active>
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+			
 		</profile>
 
 	</profiles>
