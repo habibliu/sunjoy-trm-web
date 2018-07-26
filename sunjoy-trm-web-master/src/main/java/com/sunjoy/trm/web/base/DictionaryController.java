@@ -39,7 +39,8 @@ public class DictionaryController {
 	public Response addDictionary(@RequestBody DictionaryDto dict) {
 		
 		Response response = new Response();
-		dictionaryService.addDictionary(dict);
+		Object result=dictionaryService.addDictionary(dict);
+		response.setData(result);
 		return response;
 	}
 }
