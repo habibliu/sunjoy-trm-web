@@ -102,3 +102,40 @@ ALTER TABLE "biz"."rule" ADD CONSTRAINT "rule_pkey" PRIMARY KEY ("id");
 -- Foreign Keys structure for table present_rule
 -- ----------------------------
 ALTER TABLE "biz"."rule" ADD CONSTRAINT "FK_TO_COURSE" FOREIGN KEY ("course_id") REFERENCES "mas"."course" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Table structure for rule
+-- ----------------------------
+DROP TABLE IF EXISTS "biz"."shift_student";
+CREATE TABLE "biz"."shift_student" (
+  "id" varchar(32)  NOT NULL,
+  "student_id" varchar(32)  NOT NULL,
+  "shift_id" varchar(32)  NOT NULL,
+  "checking_in" varchar(16)
+)
+;
+COMMENT ON COLUMN "biz"."shift_student"."student_id" IS '学员ID';
+COMMENT ON COLUMN "biz"."shift_student"."shift_id" IS '排班ID';
+COMMENT ON COLUMN "biz"."shift_student"."checking_in" IS '考勤';
+
+-- ----------------------------
+-- Indexes structure for table present_rule
+-- ----------------------------
+CREATE UNIQUE INDEX "IDX_PK_SHIFT_STUDENT" ON "biz"."shift_student" USING btree (
+  "id" COLLATE "pg_catalog"."default" "pg_catalog"."text_ops" ASC NULLS LAST
+);
+
+-- ----------------------------
+-- Primary Key structure for table shift_student
+-- ----------------------------
+ALTER TABLE "biz"."shift_student" ADD CONSTRAINT "shift_student_pkey" PRIMARY KEY ("id");
+-- ----------------------------
+-- Foreign Keys structure for table shift_student
+-- ----------------------------
+ALTER TABLE "biz"."shift_student" ADD CONSTRAINT "FK_TO_STUDENT" FOREIGN KEY ("student_id") REFERENCES "mas"."student" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- ----------------------------
+-- Foreign Keys structure for table shift_student
+-- ----------------------------
+ALTER TABLE "biz"."shift_student" ADD CONSTRAINT "FK_TO_SHIFT" FOREIGN KEY ("shift_id") REFERENCES "biz"."shift" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+
