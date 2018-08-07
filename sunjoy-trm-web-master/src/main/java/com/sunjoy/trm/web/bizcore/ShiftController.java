@@ -17,7 +17,9 @@ import com.sunjoy.framework.service.controller.WebController;
 import com.sunjoy.framework.utils.BeanUtils;
 import com.sunjoy.trm.bizcore.dao.criteria.RuleCriteria;
 import com.sunjoy.trm.bizcore.dao.dto.RuleDto;
+import com.sunjoy.trm.bizcore.dao.dto.ScheduleDto;
 import com.sunjoy.trm.bizcore.dao.dto.ShiftDto;
+import com.sunjoy.trm.bizcore.dao.dto.ShiftStudentDto;
 import com.sunjoy.trm.bizcore.dao.entity.Rule;
 import com.sunjoy.trm.bizcore.service.IScheduelService;
 import com.sunjoy.trm.bizcore.service.IShiftService;
@@ -45,6 +47,22 @@ public class ShiftController extends WebController{
 		PageInfo page=JSONObject.parseObject(pageInfo, PageInfo.class);
 		Page<ShiftDto> returnPage = shiftService.query(criteria,page);
 		response.setData(returnPage);
+		return response;
+	}
+	
+	@RequestMapping(value = "/ShiftStudent/list", method = RequestMethod.GET)
+	public Response listShiftStudents(@RequestParam(name = "params") String params) {
+		Response response = new Response();
+		ShiftDto criteria = JSONObject.parseObject(params, ShiftDto.class);
+		List<ShiftStudentDto> data = shiftService.queryShiftStudents(criteria.getId());
+		response.setData(data);
+		return response;
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public Response deleteShift(@RequestParam(value = "id") String id) {
+		Response response = new Response();
+		shiftService.deleteShift(id);
 		return response;
 	}
 }
