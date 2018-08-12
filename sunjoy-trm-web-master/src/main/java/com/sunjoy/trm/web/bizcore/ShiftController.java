@@ -50,7 +50,7 @@ public class ShiftController extends WebController{
 		return response;
 	}
 	
-	@RequestMapping(value = "/ShiftStudent/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/listShiftStudents", method = RequestMethod.GET)
 	public Response listShiftStudents(@RequestParam(name = "params") String params) {
 		Response response = new Response();
 		ShiftDto criteria = JSONObject.parseObject(params, ShiftDto.class);
@@ -60,9 +60,30 @@ public class ShiftController extends WebController{
 	}
 	
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public Response deleteShift(@RequestParam(value = "id") String id) {
+	public Response deleteShift(@RequestBody ShiftDto shift) {
+		Response response = new Response();
+		shiftService.deleteShift(shift.getId());
+		return response;
+	}
+	
+	@RequestMapping(value = "/batchdelete", method = RequestMethod.POST)
+	public Response batchDeleteShift(@RequestParam(value = "ids") String id) {
 		Response response = new Response();
 		shiftService.deleteShift(id);
+		return response;
+	}
+	
+	@RequestMapping(value = "/updateAttendance", method = RequestMethod.POST)
+	public Response updateAttendance(@RequestBody ShiftDto shift) {
+		Response response = new Response();
+		shiftService.updateAttendance(shift);
+		return response;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public Response updateShift(@RequestBody ShiftDto shift) {
+		Response response = new Response();
+		shiftService.updateShift(shift);
 		return response;
 	}
 }
